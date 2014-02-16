@@ -13,7 +13,7 @@ type tasklist struct {
 	tasks []task
 }
 
-func (t *tasklist) load(path string) *[]string {
+func (t *tasklist) load(path string) {
 	if _, err := os.Stat(path); err != nil {
 		if _, err := os.Create(path); err != nil {
 			log.Fatal(err, "\nCould not create file at "+path)
@@ -24,13 +24,14 @@ func (t *tasklist) load(path string) *[]string {
 		log.Fatal(err, "\nCould not read data from "+path)
 	}
 	text := string(raw)
-	lines := strings.Split(text, "\n")
-	return &lines
+	lines := strings.Split(text, "\n") // TODO Check for other new line chars
+	t.add(lines)
 }
 
 func (t *tasklist) add(args []string) {
-	for id, text := range args {
-		t.tasks = append(t.tasks, task{id, text})
+	n := len(t.tasks)
+	for i, text := range args {
+		t.tasks = append(t.tasks, task{n + i, text})
 	}
 }
 

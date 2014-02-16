@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-const dataPath string = ".godo" // Use $HOME and use system variable instead
+const dataPath string = ".godo" // TODO Use $HOME and use system variable instead
 var tasks []task = make([]task, 0, 50)
 
 func usage() {
