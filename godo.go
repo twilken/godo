@@ -9,7 +9,8 @@ import (
 	"strings"
 )
 
-var dataPath string = ".godo" // Use system variable instead
+const dataPath string = ".godo" // Use $HOME and use system variable instead
+var tasks []task = make([]task, 0, 50)
 
 func load() *[]string {
 	if _, err := os.Stat(dataPath); err != nil {
@@ -27,8 +28,8 @@ func load() *[]string {
 }
 
 func add(args []string) {
-	for _, task := range args {
-		fmt.Println(task)
+	for id, text := range args {
+		tasks = append(tasks, task{id, text})
 	}
 }
 
@@ -47,12 +48,12 @@ func main() {
 		usage()
 		os.Exit(0)
 	}
-	data := load()
-	fmt.Println(*data)
+	load()
 	switch args[0] {
 	case "add":
 		add(args[1:])
 	case "list":
 		list(args[1:])
 	}
+	fmt.Println("end:", tasks)
 }
