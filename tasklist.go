@@ -55,3 +55,20 @@ func (t *tasklist) list() {
 		fmt.Printf("%3v %v\n", task.id, task.text)
 	}
 }
+
+func (t *tasklist) del(ids []int) {
+	for i, id := range ids {
+		if intInSlice(id, ids) {
+			t.tasks = append(t.tasks[:i], t.tasks[i+1:]...)
+		}
+	}
+}
+
+func intInSlice(a int, slice []int) bool {
+	for _, b := range slice {
+		if b == a {
+			return true
+		}
+	}
+	return false
+}

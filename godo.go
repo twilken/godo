@@ -3,7 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"os"
+	"strconv"
 )
 
 const dataPath string = ".godo" // TODO Use $HOME and use system variable instead
@@ -28,6 +30,17 @@ func main() {
 		tasks.list()
 	case "list":
 		tasks.list()
+	case "del":
+		delArgs := args[1:]
+		ids := make([]int, len(delArgs))
+		for i := range ids {
+			id, err := strconv.Atoi(delArgs[i])
+			if err != nil {
+				log.Fatal(err)
+			}
+			ids[i] = id
+		}
+		tasks.del(ids)
 	}
 	tasks.save(dataPath)
 }
