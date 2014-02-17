@@ -49,7 +49,7 @@ func (t *tasklist) add(args []string) {
 	}
 }
 
-func (t *tasklist) print() {
+func (t *tasklist) list() {
 	fmt.Println(t.title + ":")
 	for _, task := range t.tasks {
 		fmt.Printf("%3v %v\n", task.id, task.text)
