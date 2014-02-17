@@ -27,4 +27,5 @@ func main() {
 		tasks.add(args[1:])
 	}
 	tasks.print()
+	tasks.save(dataPath)
 }

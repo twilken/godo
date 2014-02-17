@@ -25,7 +25,21 @@ func (t *tasklist) load(path string) {
 	}
 	text := string(raw)
 	lines := strings.Split(text, "\n") // TODO Check for other new line chars
-	t.add(lines)
+	t.add(lines[:len(lines)-1])
+}
+
+func (t *tasklist) save(path string) {
+	file, err := os.Create(path)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+	for _, task := range t.tasks {
+		_, err := file.WriteString(task.text + "\n")
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
 }
 
 func (t *tasklist) add(args []string) {
