@@ -41,6 +41,7 @@ func main() {
 			ids[i] = id
 		}
 		tasks.del(ids)
+		tasks.list()
 	}
 	tasks.save(dataPath)
 }

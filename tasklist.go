@@ -43,32 +43,20 @@ func (t *tasklist) save(path string) {
 }
 
 func (t *tasklist) add(args []string) {
-	n := len(t.tasks)
-	for i, text := range args {
-		t.tasks = append(t.tasks, task{n + i, text})
+	for _, text := range args {
+		t.tasks = append(t.tasks, task{text})
 	}
 }
 
 func (t *tasklist) list() {
 	fmt.Println(t.title + ":")
-	for _, task := range t.tasks {
-		fmt.Printf("%3v %v\n", task.id, task.text)
+	for i, task := range t.tasks {
+		fmt.Printf("%3v %v\n", i, task.text)
 	}
 }
 
 func (t *tasklist) del(ids []int) {
 	for i, id := range ids {
-		if intInSlice(id, ids) {
-			t.tasks = append(t.tasks[:i], t.tasks[i+1:]...)
-		}
+		t.tasks = append(t.tasks[:id-i], t.tasks[id-i+1:]...)
 	}
-}
-
-func intInSlice(a int, slice []int) bool {
-	for _, b := range slice {
-		if b == a {
-			return true
-		}
-	}
-	return false
 }
