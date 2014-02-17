@@ -25,7 +25,9 @@ func main() {
 	switch args[0] {
 	case "add":
 		tasks.add(args[1:])
+		tasks.list()
+	case "list":
+		tasks.list()
 	}
-	tasks.list()
 	tasks.save(dataPath)
 }
