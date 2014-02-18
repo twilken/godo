@@ -25,12 +25,12 @@ func main() {
 	tasks := tasklist{title: "Tasks"}
 	tasks.load(dataPath)
 	switch args[0] {
-	case "add":
+	case "add", "a":
 		tasks.add(args[1:])
 		tasks.list()
-	case "list":
+	case "list", "l":
 		tasks.list()
-	case "del":
+	case "del", "d":
 		delArgs := args[1:]
 		ids := make([]int, len(delArgs))
 		for i := range ids {
