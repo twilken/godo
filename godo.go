@@ -11,9 +11,10 @@ import (
 const usage string = `
 godo [subcommand] [arguments to subcommand]
 subcommands:
-	add, a		add one or more tasks
-	del, d		delete one or more tasks by their number
-	list, l		show a list of all tasks
+	add, a		Add one or more tasks
+	del, d		Delete one or more tasks by their number
+	list, l		Show a list of all tasks
+	help, h		Show help text
 `
 const path string = ".godo" // TODO Use $HOME and use system variable instead
 var tasks *task.Tasklist
@@ -30,11 +31,13 @@ func main() {
 	case "add", "a":
 		add(args[1:])
 		list()
-	case "list", "l":
-		list()
 	case "del", "d":
 		del(args[1:])
 		list()
+	case "list", "l":
+		list()
+	case "help", "h":
+		fmt.Print(usage)
 	}
 	tasks.Save(path)
 }
