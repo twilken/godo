@@ -58,6 +58,10 @@ func (t *Tasklist) Del(ids []int) {
 	}
 }
 
+func (t *Tasklist) Len() int {
+	return len(t.Tasks)
+}
+
 func (t Tasklist) String() string {
 	s := fmt.Sprint(t.Title, ":\n")
 	for i, task := range t.Tasks {
