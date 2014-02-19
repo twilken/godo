@@ -49,16 +49,16 @@ func (t *Tasklist) Add(texts []string) {
 	}
 }
 
+func (t *Tasklist) Del(ids []int) {
+	for i, id := range ids {
+		t.Tasks = append(t.Tasks[:id-i], t.Tasks[id-i+1:]...)
+	}
+}
+
 func (t Tasklist) String() string {
 	s := fmt.Sprint(t.Title, ":")
 	for i, task := range t.Tasks {
 		s += fmt.Sprintf("%3v %v\n", i, task.Text)
 	}
 	return s
-}
-
-func (t *Tasklist) Del(ids []int) {
-	for i, id := range ids {
-		t.Tasks = append(t.Tasks[:id-i], t.Tasks[id-i+1:]...)
-	}
 }
