@@ -59,7 +59,7 @@ func (t *Tasklist) Del(ids []int) {
 }
 
 func (t Tasklist) String() string {
-	s := fmt.Sprint(t.Title, ":")
+	s := fmt.Sprint(t.Title, ":\n")
 	for i, task := range t.Tasks {
 		s += fmt.Sprintf("%3v %v\n", i, task.Text)
 	}
