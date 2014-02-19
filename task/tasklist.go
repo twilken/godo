@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"sort"
 	"strings"
 )
 
@@ -50,6 +51,8 @@ func (t *Tasklist) Add(texts []string) {
 }
 
 func (t *Tasklist) Del(ids []int) {
+	sort.Sort(sort.IntSlice(ids))
+	fmt.Println(ids)
 	for i, id := range ids {
 		t.Tasks = append(t.Tasks[:id-i], t.Tasks[id-i+1:]...)
 	}
