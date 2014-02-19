@@ -42,8 +42,8 @@ func (t *Tasklist) Save(path string) {
 	}
 }
 
-func (t *Tasklist) Add(args []string) {
-	for _, text := range args {
+func (t *Tasklist) Add(texts []string) {
+	for _, text := range texts {
 		t.Tasks = append(t.Tasks, Task{text})
 	}
 }
