@@ -3,13 +3,14 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/tenpeoplemeet/godo/task"
 	"log"
 	"os"
 	"strconv"
 )
 
 const dataPath string = ".godo" // TODO Use $HOME and use system variable instead
-var tasks []task = make([]task, 0, 50)
+var tasks []task.Task = make([]task.Task, 0, 50)
 
 func usage() {
 	fmt.Println("godo [add|list|del] [subcommands]")
@@ -22,14 +23,14 @@ func main() {
 		usage()
 		os.Exit(0)
 	}
-	tasks := tasklist{title: "Tasks"}
-	tasks.load(dataPath)
+	tasks := task.Tasklist{Title: "Tasks"}
+	tasks.Load(dataPath)
 	switch args[0] {
 	case "add", "a":
-		tasks.add(args[1:])
-		tasks.list()
+		tasks.Add(args[1:])
+		tasks.List()
 	case "list", "l":
-		tasks.list()
+		tasks.List()
 	case "del", "d":
 		delArgs := args[1:]
 		ids := make([]int, len(delArgs))
@@ -40,8 +41,8 @@ func main() {
 			}
 			ids[i] = id
 		}
-		tasks.del(ids)
-		tasks.list()
+		tasks.Del(ids)
+		tasks.List()
 	}
-	tasks.save(dataPath)
+	tasks.Save(dataPath)
 }
