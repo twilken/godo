@@ -9,7 +9,7 @@ import (
 	"strconv"
 )
 
-const dataPath string = ".godo" // TODO Use $HOME and use system variable instead
+const path string = ".godo" // TODO Use $HOME and use system variable instead
 var tasks []task.Task = make([]task.Task, 0, 50)
 
 func usage() {
@@ -24,13 +24,13 @@ func main() {
 		os.Exit(0)
 	}
 	tasks := task.Tasklist{Title: "Tasks"}
-	tasks.Load(dataPath)
+	tasks.Load(path)
 	switch args[0] {
 	case "add", "a":
 		tasks.Add(args[1:])
-		tasks.List()
+		fmt.Print(tasks)
 	case "list", "l":
-		tasks.List()
+		fmt.Print(tasks)
 	case "del", "d":
 		delArgs := args[1:]
 		ids := make([]int, len(delArgs))
@@ -42,7 +42,7 @@ func main() {
 			ids[i] = id
 		}
 		tasks.Del(ids)
-		tasks.List()
+		fmt.Print(tasks)
 	}
-	tasks.Save(dataPath)
+	tasks.Save(path)
 }
