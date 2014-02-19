@@ -10,7 +10,7 @@ import (
 )
 
 const path string = ".godo" // TODO Use $HOME and use system variable instead
-var tasks []task.Task = make([]task.Task, 0, 50)
+var tasks *task.Tasklist
 
 func usage() {
 	fmt.Println("godo [add|list|del] [subcommands]")
@@ -23,26 +23,37 @@ func main() {
 		usage()
 		os.Exit(0)
 	}
-	tasks := task.Tasklist{Title: "Tasks"}
+	tasks = &task.Tasklist{Title: "Tasks"}
 	tasks.Load(path)
 	switch args[0] {
 	case "add", "a":
-		tasks.Add(args[1:])
-		fmt.Print(tasks)
+		add(args[1:])
+		list()
 	case "list", "l":
-		fmt.Print(tasks)
+		list()
 	case "del", "d":
-		delArgs := args[1:]
-		ids := make([]int, len(delArgs))
-		for i := range ids {
-			id, err := strconv.Atoi(delArgs[i])
-			if err != nil {
-				log.Fatal(err)
-			}
-			ids[i] = id
-		}
-		tasks.Del(ids)
-		fmt.Print(tasks)
+		del(args[1:])
+		list()
 	}
 	tasks.Save(path)
+}
+
+func add(args []string) {
+	tasks.Add(args)
+}
+
+func list() {
+	fmt.Print(tasks)
+}
+
+func del(args []string) {
+	ids := make([]int, len(args))
+	for i := range ids {
+		id, err := strconv.Atoi(args[i])
+		if err != nil {
+			log.Fatal(err)
+		}
+		ids[i] = id
+	}
+	tasks.Del(ids)
 }
