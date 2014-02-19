@@ -5,23 +5,24 @@ import (
 	"fmt"
 	"github.com/tenpeoplemeet/godo/task"
 	"log"
-	"os"
 	"strconv"
 )
 
+const usage string = `
+godo [subcommand] [arguments to subcommand]
+subcommands:
+	add, a		add one or more tasks
+	del, d		delete one or more tasks by their number
+	list, l		show a list of all tasks
+`
 const path string = ".godo" // TODO Use $HOME and use system variable instead
 var tasks *task.Tasklist
-
-func usage() {
-	fmt.Println("godo [add|list|del] [subcommands]")
-}
 
 func main() {
 	flag.Parse()
 	args := flag.Args()
 	if len(args) == 0 {
-		usage()
-		os.Exit(0)
+		log.Fatal(usage)
 	}
 	tasks = &task.Tasklist{Title: "Tasks"}
 	tasks.Load(path)
