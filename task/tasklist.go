@@ -44,7 +44,8 @@ func (t *Tasklist) Save(path string) {
 
 func (t *Tasklist) Add(texts []string) {
 	for _, text := range texts {
-		t.Tasks = append(t.Tasks, Task{text})
+		trimmed := strings.Replace(text, "\n", " ", -1)
+		t.Tasks = append(t.Tasks, Task{trimmed})
 	}
 }
 
