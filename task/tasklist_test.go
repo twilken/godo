@@ -1,22 +1,21 @@
 package task
 
 import (
+	"fmt"
 	"testing"
 )
 
-func getFilledTasklist() *Tasklist {
-	tasks := []Task{
-		Task{"Task No. 1"},
-		Task{"Task No. 2"},
-		Task{"Task No. 3"},
-		Task{"Task No. 4"},
-		Task{"Task No. 5"},
+func getFilledTasklist(numOfTasks int) *Tasklist {
+	tasks := []Task{}
+	for i := 0; i < numOfTasks; i++ {
+		text := fmt.Sprint("Task No", i)
+		tasks = append(tasks, Task{text})
 	}
 	return &Tasklist{Title: "Tasks", Tasks: tasks}
 }
 
 func TestDel(t *testing.T) {
-	list := getFilledTasklist()
+	list := getFilledTasklist(5)
 	list.Del([]int{0, 2, 4})
 	numOfTasks := list.Len()
 	if numOfTasks != 2 {
@@ -25,7 +24,7 @@ func TestDel(t *testing.T) {
 }
 
 func TestDelOutOfBounds(t *testing.T) {
-	list := getFilledTasklist()
+	list := getFilledTasklist(5)
 	// catch out of bounds panic
 	defer func() {
 		if recover() != nil {
