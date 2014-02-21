@@ -34,3 +34,22 @@ func TestDelOutOfBounds(t *testing.T) {
 	}()
 	list.Del([]int{-1, 100000})
 }
+
+func TestLen(t *testing.T) {
+	list := &Tasklist{Title: "Tasks"}
+	if list.Len() != 0 {
+		t.Error("Expected 0, got ", list.Len())
+	}
+	list.Add([]string{"T1", "T2", "T3"})
+	if list.Len() != 3 {
+		t.Error("Expected 3, got ", list.Len())
+	}
+	list.Del([]int{0, 1})
+	if list.Len() != 1 {
+		t.Error("Expected 1, got ", list.Len())
+	}
+	list.Del([]int{0})
+	if list.Len() != 0 {
+		t.Error("Expected 0, got ", list.Len())
+	}
+}
