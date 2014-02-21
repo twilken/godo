@@ -5,6 +5,7 @@ import (
 	"testing"
 )
 
+// createTasklist return a Tasklist with numOfTasks tasks.
 func createTasklist(numOfTasks int) *Tasklist {
 	tasks := []Task{}
 	for i := 0; i < numOfTasks; i++ {
