@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func getFilledTasklist(numOfTasks int) *Tasklist {
+func createTasklist(numOfTasks int) *Tasklist {
 	tasks := []Task{}
 	for i := 0; i < numOfTasks; i++ {
 		text := fmt.Sprint("Task No", i)
@@ -15,7 +15,7 @@ func getFilledTasklist(numOfTasks int) *Tasklist {
 }
 
 func TestDel(t *testing.T) {
-	list := getFilledTasklist(5)
+	list := createTasklist(5)
 	list.Del([]int{0, 2, 4})
 	numOfTasks := list.Len()
 	if numOfTasks != 2 {
@@ -24,7 +24,7 @@ func TestDel(t *testing.T) {
 }
 
 func TestDelOutOfBounds(t *testing.T) {
-	list := getFilledTasklist(5)
+	list := createTasklist(5)
 	// catch out of bounds panic
 	defer func() {
 		if recover() != nil {
@@ -35,7 +35,7 @@ func TestDelOutOfBounds(t *testing.T) {
 }
 
 func TestLen(t *testing.T) {
-	list := &Tasklist{Title: "Tasks"}
+	list := createTasklist(0)
 	if list.Len() != 0 {
 		t.Error("Expected 0, got ", list.Len())
 	}
