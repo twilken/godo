@@ -51,9 +51,12 @@ func (t *Tasklist) Add(texts []string) {
 }
 
 func (t *Tasklist) Del(ids []int) {
+	len := t.Len()
 	sort.Sort(sort.IntSlice(ids))
 	for i, id := range ids {
-		t.Tasks = append(t.Tasks[:id-i], t.Tasks[id-i+1:]...)
+		if id >= 0 && id < len {
+			t.Tasks = append(t.Tasks[:id-i], t.Tasks[id-i+1:]...)
+		}
 	}
 }
 
