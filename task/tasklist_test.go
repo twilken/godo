@@ -14,6 +14,14 @@ func createTasklist(numOfTasks int) *Tasklist {
 	return &Tasklist{Title: "Tasks", Tasks: tasks}
 }
 
+func TestAdd(t *testing.T) {
+	list := createTasklist(0)
+	list.Add([]string{"T1", "T2", "T3"})
+	if list.Len() != 3 {
+		t.Error("Expected 3, got ", list.Len())
+	}
+}
+
 func TestDel(t *testing.T) {
 	list := createTasklist(5)
 	list.Del([]int{0, 2, 4})
