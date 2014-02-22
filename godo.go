@@ -23,18 +23,16 @@ const saveFileName string = ".godo"
 var tasks *task.Tasklist
 
 func main() {
-	flag.Parse()
-	args := flag.Args()
-	if len(args) == 0 {
-		log.Fatal(usage)
-	}
-	usr, err := user.Current()
-	if err != nil {
-		log.Fatal(err)
-	}
-	path := usr.HomeDir + "/" + saveFileName
+	checkNumOfArgs()
+	path := getSaveFilePath()
 	tasks = &task.Tasklist{Title: "Tasks"}
 	tasks.Load(path)
+	processSubcommands()
+	tasks.Save(path)
+}
+
+func processSubcommands() {
+	args := flag.Args()
 	switch args[0] {
 	case "add", "a":
 		add(args[1:])
@@ -47,7 +45,23 @@ func main() {
 	case "help", "h":
 		fmt.Print(usage)
 	}
-	tasks.Save(path)
+}
+
+func checkNumOfArgs() []string {
+	flag.Parse()
+	args := flag.Args()
+	if len(args) == 0 {
+		log.Fatal(usage)
+	}
+	return args
+}
+
+func getSaveFilePath() string {
+	usr, err := user.Current()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return usr.HomeDir + "/" + saveFileName
 }
 
 func add(args []string) {
