@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/tenpeoplemeet/godo/task"
 	"log"
+	"os/user"
 	"strconv"
 )
 
@@ -16,7 +17,9 @@ subcommands:
 	list, l		Show a list of all tasks
 	help, h		Show help text
 `
-const path string = ".godo" // TODO Use $HOME and use system variable instead
+
+const saveFileName string = ".godo"
+
 var tasks *task.Tasklist
 
 func main() {
@@ -25,6 +28,11 @@ func main() {
 	if len(args) == 0 {
 		log.Fatal(usage)
 	}
+	usr, err := user.Current()
+	if err != nil {
+		log.Fatal(err)
+	}
+	path := usr.HomeDir + "/" + saveFileName
 	tasks = &task.Tasklist{Title: "Tasks"}
 	tasks.Load(path)
 	switch args[0] {
