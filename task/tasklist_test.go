@@ -31,6 +31,40 @@ func TestLoadNonExistingFile(t *testing.T) {
 	}
 }
 
+func TestLoadExisingFile(t *testing.T) {
+	path := ".godo_file_exists"
+	list := createTasklist(0)
+
+	// Delete file after test
+	defer func() {
+		os.Remove(path)
+	}()
+
+	// Setup a file with some tasks
+	file, err := os.Create(path)
+	if err != nil {
+		t.Error("Test setup is not able to create file. ", err)
+	}
+	defer file.Close()
+	if _, err := file.WriteString("Task1\nTask2\nTask3\n"); err != nil {
+		t.Error("Test setup can not write to file. ", err)
+	}
+
+	// Actual test
+	if err := list.Load(path); err != nil {
+		t.Error("Load returned error: ", err)
+	}
+	numOfTasks := list.Len()
+	if numOfTasks != 3 {
+		t.Error("Expected 3, got ", numOfTasks)
+	}
+	if list.Tasks[0].Text != "Task1" ||
+		list.Tasks[1].Text != "Task2" ||
+		list.Tasks[2].Text != "Task3" {
+		t.Error("Task content not loaded properly")
+	}
+}
+
 func TestAdd(t *testing.T) {
 	list := createTasklist(0)
 	list.Add([]string{"T1", "T2", "T3"})
