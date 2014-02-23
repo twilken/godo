@@ -2,6 +2,7 @@ package task
 
 import (
 	"fmt"
+	"os"
 	"testing"
 )
 
@@ -13,6 +14,21 @@ func createTasklist(numOfTasks int) *Tasklist {
 		tasks = append(tasks, Task{text})
 	}
 	return &Tasklist{Title: "Tasks", Tasks: tasks}
+}
+
+func TestLoadNonExistingFile(t *testing.T) {
+	path := ".godo_does_not_exist"
+	list := createTasklist(0)
+
+	// Delete file after test
+	defer func() {
+		os.Remove(path)
+	}()
+
+	// Return an error if Load function does not automatically create the missing file
+	if err := list.Load(path); err != nil {
+		t.Error(err)
+	}
 }
 
 func TestAdd(t *testing.T) {
