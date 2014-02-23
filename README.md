@@ -1,4 +1,5 @@
 godo
 ====
 
-Some todo list thing.
+A simple command line task manager.
+
