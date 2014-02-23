@@ -46,6 +46,13 @@ func TestDel(t *testing.T) {
 	if numOfTasks != 2 {
 		t.Error("Expected 2, got ", numOfTasks)
 	}
+
+	list = createTasklist(4)
+	list.Del([]int{3, 0, 1, 2})
+	numOfTasks = list.Len()
+	if numOfTasks != 0 {
+		t.Error("Expected 0, got ", numOfTasks)
+	}
 }
 
 func TestDelOutOfBounds(t *testing.T) {
