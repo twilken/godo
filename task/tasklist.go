@@ -14,19 +14,25 @@ type Tasklist struct {
 	Tasks []Task
 }
 
-func (t *Tasklist) Load(path string) {
-	if _, err := os.Stat(path); err != nil {
+func (t *Tasklist) Load(path string) error {
+	if !fileExists(path) {
 		if _, err := os.Create(path); err != nil {
-			log.Fatal(err, "\nCould not create file at "+path)
+			return err
 		}
 	}
 	raw, err := ioutil.ReadFile(path)
 	if err != nil {
-		log.Fatal(err, "\nCould not read data from "+path)
+		return err
 	}
 	text := string(raw)
 	lines := strings.Split(text, "\n") // TODO Check for other new line chars
 	t.Add(lines[:len(lines)-1])
+	return nil
+}
+
+func fileExists(path string) bool {
+	_, err := os.Stat(path)
+	return err == nil
 }
 
 func (t *Tasklist) Save(path string) {
