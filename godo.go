@@ -26,7 +26,7 @@ func main() {
 	checkNumOfArgs()
 	path := getSaveFilePath()
 	tasks = &task.Tasklist{Title: "Tasks"}
-	if err := tasks.Load(path), err != nil {
+	if err := tasks.Load(path); err != nil {
 		log.Fatal(err)
 	}
 	processSubcommands()
