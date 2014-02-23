@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/tenpeoplemeet/godo/task"
 	"log"
-	"os/user"
+	"os"
 	"strconv"
 )
 
@@ -59,11 +59,11 @@ func checkNumOfArgs() []string {
 }
 
 func getSaveFilePath() string {
-	usr, err := user.Current()
-	if err != nil {
-		log.Fatal(err)
+	path := os.Getenv("GODOPATH")
+	if path == "" {
+		path = os.Getenv("HOME")
 	}
-	return usr.HomeDir + "/" + saveFileName
+	return path + "/" + saveFileName
 }
 
 func add(args []string) {
