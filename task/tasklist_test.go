@@ -6,10 +6,10 @@ import (
 	"testing"
 )
 
-// createTasklist returns a Tasklist with numOfTasks tasks.
-func createTasklist(numOfTasks int) *Tasklist {
+// createTasklist returns a Tasklist with num tasks.
+func createTasklist(num int) *Tasklist {
 	tasks := []Task{}
-	for i := 0; i < numOfTasks; i++ {
+	for i := 0; i < num; i++ {
 		text := fmt.Sprint("Task No", i)
 		tasks = append(tasks, Task{text})
 	}
