@@ -9,6 +9,7 @@ import (
 	"strconv"
 )
 
+// usage contains the godo help text.
 const usage string = `
 godo [subcommand] [arguments to subcommand]
 subcommands:
@@ -18,8 +19,11 @@ subcommands:
 	help, h		Show help text
 `
 
+// saveFileName is the name that is used for the godo save file. Note that this
+// solely describes the file name and not the path.
 const saveFileName string = ".godo"
 
+// tasks is the actual list of tasks used by godo.
 var tasks *task.Tasklist
 
 func main() {
@@ -33,6 +37,7 @@ func main() {
 	tasks.Save(path)
 }
 
+// processSubcommands evaluates the second cli argument.
 func processSubcommands() {
 	args := flag.Args()
 	switch args[0] {
@@ -49,6 +54,7 @@ func processSubcommands() {
 	}
 }
 
+// checkNumOfArgs exits the program if no arguments are supplied.
 func checkNumOfArgs() []string {
 	flag.Parse()
 	args := flag.Args()
@@ -58,6 +64,9 @@ func checkNumOfArgs() []string {
 	return args
 }
 
+// getSaveFilePath either returns the value of the environment variable GODOPATH,
+// or the HOME env var. The save file name is always determined by the saveFileName
+// const.
 func getSaveFilePath() string {
 	path := os.Getenv("GODOPATH")
 	if path == "" {
@@ -66,14 +75,17 @@ func getSaveFilePath() string {
 	return path + "/" + saveFileName
 }
 
+// add processes the add subcommand.
 func add(args []string) {
 	tasks.Add(args)
 }
 
+// list processes the list subcommand.
 func list() {
 	fmt.Print(tasks)
 }
 
+// del processes the del subcommand.
 func del(args []string) {
 	ids := make([]int, len(args))
 	for i := range ids {
