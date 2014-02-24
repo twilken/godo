@@ -1,5 +1,5 @@
 # godo
-A simple command line task manager.
+Yet another simple command line todo list.
 
 
 
@@ -43,7 +43,8 @@ godo help
 
 ### Save file location
 By default the godo save file is in your `HOME` directory. You can change that by creating a
-`GODOPATH` environment variable and setting it to another path. The actual file is always named `.godo`.
+`GODOPATH` environment variable and setting it to another path. Note that, for now, the directory must
+exist before godo can use it. The actual file is always named `.godo`.
 
 
 
