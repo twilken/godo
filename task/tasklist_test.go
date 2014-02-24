@@ -65,6 +65,24 @@ func TestLoadExisingFile(t *testing.T) {
 	}
 }
 
+func TestSaveNotPreviouslyExisingFile(t *testing.T) {
+	path := ".godo_file_does_not_exist"
+	list := createTasklist(3)
+
+	// Delete file after test
+	defer func() {
+		os.Remove(path)
+	}()
+
+	list.Save(path)
+	loaded := createTasklist(0)
+	loaded.Load(path)
+	numOfTasks := loaded.Len()
+	if numOfTasks != 3 {
+		t.Error("Expected 3, got ", numOfTasks)
+	}
+}
+
 func TestAdd(t *testing.T) {
 	list := createTasklist(0)
 	list.Add([]string{"T1", "T2", "T3"})
