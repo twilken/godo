@@ -4,7 +4,6 @@ package task
 import (
 	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
 	"sort"
 	"strings"
@@ -43,19 +42,21 @@ func fileExists(path string) bool {
 }
 
 // Save saves all tasks in t to the file at path. Tasks are stored in plain text
-// and each tasks is separated by a new line.
-func (t *Tasklist) Save(path string) {
+// and each tasks is separated by a new line. Returns an error if the the operation
+// can not be completed.
+func (t *Tasklist) Save(path string) error {
 	file, err := os.Create(path)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	defer file.Close()
 	for _, task := range t.Tasks {
 		_, err := file.WriteString(task.Text + "\n")
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
 	}
+	return nil
 }
 
 // Add creates a task for each string in texts and adds them to t.

@@ -34,7 +34,9 @@ func main() {
 		log.Fatal(err)
 	}
 	processSubcommands()
-	tasks.Save(path)
+	if err := tasks.Save(path); err != nil {
+		log.Fatal(err)
+	}
 }
 
 // processSubcommands evaluates the second cli argument.
