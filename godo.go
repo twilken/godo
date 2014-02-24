@@ -51,6 +51,9 @@ func processSubcommands() {
 		list()
 	case "help", "h":
 		fmt.Print(usage)
+	default:
+		fmt.Println("Unknown subcommand")
+		fmt.Print(usage)
 	}
 }
 
