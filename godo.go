@@ -94,7 +94,7 @@ func del(args []string) {
 	for i := range ids {
 		id, err := strconv.Atoi(args[i])
 		if err != nil {
-			log.Fatal(err)
+			log.Fatal("Arguments to del subcommand must be of type integer\n" + usage)
 		}
 		ids[i] = id
 	}
