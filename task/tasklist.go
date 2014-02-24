@@ -1,3 +1,4 @@
+// Package task implements a simple todo list data structure.
 package task
 
 import (
