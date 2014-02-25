@@ -12,11 +12,18 @@ import (
 // usage contains the godo help text.
 const usage string = `
 godo [subcommand] [arguments to subcommand]
+
 subcommands:
-	add, a		Add one or more tasks
-	del, d		Delete one or more tasks by their number
-	list, l		Show a list of all tasks
-	help, h		Show help text
+	add, a      Add one or more tasks
+	del, d      Delete one or more tasks by their number
+	list, l     Show a list of all tasks
+	help, h     Show help text
+
+examples:
+	godo add "Buy car" Milk "Run away"      Add three tasks
+	godo del 0 1                            Delete two tasks
+	godo list                               Show all tasks
+	godo help                               Show help
 `
 
 // saveFileName is the name that is used for the godo save file. Note that this
