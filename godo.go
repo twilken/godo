@@ -59,7 +59,7 @@ func processSubcommands() {
 	}
 }
 
-// checkNumOfArgs exits the program if no arguments are supplied.
+// checkNumOfArgs exits the program if no cli arguments are supplied.
 func checkNumOfArgs() []string {
 	flag.Parse()
 	args := flag.Args()
