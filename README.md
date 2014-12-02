@@ -1,6 +1,7 @@
 # godo
 
 [![Build Status](https://travis-ci.org/tenp/godo.png)](https://travis-ci.org/tenp/godo)
+[![GoDoc](https://godoc.org/github.com/tenp/godo?status.svg)](http://godoc.org/github.com/tenp/godo)
 
 Yet another simple command line todo list.
 
