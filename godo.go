@@ -3,10 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/tenp/godo/task"
 	"log"
 	"os"
 	"strconv"
+
+	"github.com/tenp/godo/task"
 )
 
 // usage contains the godo help text.
