@@ -1,6 +1,4 @@
 /*
-godo
-
 Yet another simple command line todo list.
 
 Usage
@@ -34,9 +32,5 @@ Save file location
 By default the godo save file is in your `HOME` directory. You can change that by creating a
 `GODOPATH` environment variable and setting it to another path. Note that, for now, the directory must
 exist before godo can use it. The actual file is always named `.godo`.
-
-Why
-
-For me this is part of learning about **git**, **github** and **golang**.
 */
 package main
