@@ -1,7 +1,10 @@
 # godo
-Yet another simple command line todo list.
 
 [![Build Status](https://travis-ci.org/tenp/godo.png)](https://travis-ci.org/tenp/godo)
+
+Yet another simple command line todo list.
+
+
 
 
 
