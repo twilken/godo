@@ -15,10 +15,10 @@ godo [subcommand] [arguments to subcommand]
 ```
 The following subcommands are available:
 ```
-	add, a		Add one or more tasks
-	del, d		Delete one or more tasks by their number
-	list, l		Show a list of all tasks
-	help, h		Show help text
+add, a		Add one or more tasks
+del, d		Delete one or more tasks by their number
+list, l		Show a list of all tasks
+help, h		Show help text
 ```
 There is a short version for every subcommand.
 
