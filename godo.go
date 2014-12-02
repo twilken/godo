@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/tenpeoplemeet/godo/task"
+	"github.com/tenp/godo/task"
 	"log"
 	"os"
 	"strconv"
